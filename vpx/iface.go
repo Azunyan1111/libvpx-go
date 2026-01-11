@@ -1,7 +1,8 @@
 package vpx
 
 /*
-#cgo pkg-config: vpx
+#cgo CFLAGS: -I${SRCDIR}/../include
+#cgo LDFLAGS: -L${SRCDIR}/../lib -lvpx
 #include <vpx/vp8dx.h>
 #include <vpx/vp8cx.h>
 #include <stdlib.h>
