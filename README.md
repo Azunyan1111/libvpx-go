@@ -7,8 +7,16 @@ Go bindings for [libvpx-1.15.2](http://www.webmproject.org/code/), the WebM Proj
 This is a fork of [xlab/libvpx-go](https://github.com/xlab/libvpx-go) with the following improvements:
 
 - **Static linking** - libvpx 1.15.2 static library is bundled, no system installation required
+- **Multi-platform support** - macOS arm64 and Linux amd64 static libraries included
 - **Go Modules support** - Modern `go.mod` included
 - **Zero dependencies** - Just clone and build
+
+## Supported Platforms
+
+| Platform | Architecture | Status |
+|----------|--------------|--------|
+| macOS    | arm64        | Supported |
+| Linux    | amd64        | Supported |
 
 ## Installation
 
@@ -44,9 +52,10 @@ if img != nil {
 
 This repository includes:
 
-- `lib/libvpx.a` - libvpx 1.15.2 static library (BSD 3-Clause License)
+- `lib/darwin_arm64/libvpx.a` - libvpx 1.15.2 static library for macOS arm64
+- `lib/linux_amd64/libvpx.a` - libvpx 1.15.2 static library for Linux amd64
 - `include/vpx/` - libvpx header files
-- `lib/LICENSE.libvpx` - libvpx license file
+- `lib/LICENSE.libvpx` - libvpx license file (BSD 3-Clause License)
 
 ## Demo Application
 
@@ -68,13 +77,31 @@ apt-get install libogg-dev libvorbis-dev libopus-dev portaudio19-dev
 go run ./cmd/webm-player your_video.webm
 ```
 
-## Rebuilding the bindings
+## Development
+
+### Rebuilding the bindings
 
 If you need to regenerate the bindings, install [c-for-go](https://git.io/c-for-go) first:
 
 ```bash
 make clean
 make
+```
+
+### Testing
+
+```bash
+# Run tests on host
+make test
+
+# Run tests on Linux (Docker required)
+make test-linux
+```
+
+### Building static library for Linux
+
+```bash
+make build-libvpx-linux
 ```
 
 ## License
