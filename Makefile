@@ -7,5 +7,5 @@ clean:
 	rm -f vpx/vpx.go
 
 test:
-	cd vpx && go build
+	cd vpx && go test -v
 	
