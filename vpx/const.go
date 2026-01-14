@@ -21,15 +21,15 @@ const (
 	Vp8Fourcc = 808996950
 	// Vp9Fourcc as defined in libvpx-go/<predefine>:25
 	Vp9Fourcc = 809062486
-	// TsMaxPeriodicity as defined in vpx-1.6.0/vpx_encoder.h:37
+	// TsMaxPeriodicity as defined in vpx-1.15.2/vpx_encoder.h:37
 	TsMaxPeriodicity = 16
-	// TsMaxLayers as defined in vpx-1.6.0/vpx_encoder.h:40
+	// TsMaxLayers as defined in vpx-1.15.2/vpx_encoder.h:40
 	TsMaxLayers = 5
-	// MaxLayers as defined in vpx-1.6.0/vpx_encoder.h:46
+	// MaxLayers as defined in vpx-1.15.2/vpx_encoder.h:46
 	MaxLayers = 12
-	// SsMaxLayers as defined in vpx-1.6.0/vpx_encoder.h:52
+	// SsMaxLayers as defined in vpx-1.15.2/vpx_encoder.h:52
 	SsMaxLayers = 5
-	// SsDefaultLayers as defined in vpx-1.6.0/vpx_encoder.h:55
+	// SsDefaultLayers as defined in vpx-1.15.2/vpx_encoder.h:55
 	SsDefaultLayers = 1
 	// EncoderABIVersion as defined in vpx-1.15.2/vpx_encoder.h:65
 	EncoderABIVersion = 18 + CodecABIVersion + ExtRatectrlABIVersion
@@ -37,98 +37,98 @@ const (
 	TplABIVersion = 4
 	// ExtRatectrlABIVersion as defined in vpx-1.15.2/vpx_ext_ratectrl.h:33
 	ExtRatectrlABIVersion = 6 + TplABIVersion
-	// CodecCapPsnr as defined in vpx-1.6.0/vpx_encoder.h:77
+	// CodecCapPsnr as defined in vpx-1.15.2/vpx_encoder.h:77
 	CodecCapPsnr = 65536
-	// CodecCapOutputPartition as defined in vpx-1.6.0/vpx_encoder.h:84
+	// CodecCapOutputPartition as defined in vpx-1.15.2/vpx_encoder.h:84
 	CodecCapOutputPartition = 131072
-	// CodecCapHighbitdepth as defined in vpx-1.6.0/vpx_encoder.h:88
+	// CodecCapHighbitdepth as defined in vpx-1.15.2/vpx_encoder.h:88
 	CodecCapHighbitdepth = 262144
-	// CodecUsePsnr as defined in vpx-1.6.0/vpx_encoder.h:97
+	// CodecUsePsnr as defined in vpx-1.15.2/vpx_encoder.h:97
 	CodecUsePsnr = 65536
-	// CodecUseOutputPartition as defined in vpx-1.6.0/vpx_encoder.h:98
+	// CodecUseOutputPartition as defined in vpx-1.15.2/vpx_encoder.h:98
 	CodecUseOutputPartition = 131072
-	// CodecUseHighbitdepth as defined in vpx-1.6.0/vpx_encoder.h:100
+	// CodecUseHighbitdepth as defined in vpx-1.15.2/vpx_encoder.h:100
 	CodecUseHighbitdepth = 262144
-	// FrameIsKey as defined in vpx-1.6.0/vpx_encoder.h:129
+	// FrameIsKey as defined in vpx-1.15.2/vpx_encoder.h:129
 	FrameIsKey = 1
-	// FrameIsDroppable as defined in vpx-1.6.0/vpx_encoder.h:130
+	// FrameIsDroppable as defined in vpx-1.15.2/vpx_encoder.h:130
 	FrameIsDroppable = 2
-	// FrameIsInvisible as defined in vpx-1.6.0/vpx_encoder.h:133
+	// FrameIsInvisible as defined in vpx-1.15.2/vpx_encoder.h:133
 	FrameIsInvisible = 4
-	// FrameIsFragment as defined in vpx-1.6.0/vpx_encoder.h:135
+	// FrameIsFragment as defined in vpx-1.15.2/vpx_encoder.h:135
 	FrameIsFragment = 8
-	// ErrorResilientDefault as defined in vpx-1.6.0/vpx_encoder.h:145
+	// ErrorResilientDefault as defined in vpx-1.15.2/vpx_encoder.h:145
 	ErrorResilientDefault = 1
-	// ErrorResilientPartitions as defined in vpx-1.6.0/vpx_encoder.h:147
+	// ErrorResilientPartitions as defined in vpx-1.15.2/vpx_encoder.h:147
 	ErrorResilientPartitions = 2
-	// EflagForceKf as defined in vpx-1.6.0/vpx_encoder.h:292
+	// EflagForceKf as defined in vpx-1.15.2/vpx_encoder.h:292
 	EflagForceKf = 1
-	// DlRealtime as defined in vpx-1.6.0/vpx_encoder.h:898
+	// DlRealtime as defined in vpx-1.15.2/vpx_encoder.h:898
 	DlRealtime = 1
-	// DlGoodQuality as defined in vpx-1.6.0/vpx_encoder.h:900
+	// DlGoodQuality as defined in vpx-1.15.2/vpx_encoder.h:900
 	DlGoodQuality = 1000000
-	// DlBestQuality as defined in vpx-1.6.0/vpx_encoder.h:902
+	// DlBestQuality as defined in vpx-1.15.2/vpx_encoder.h:902
 	DlBestQuality = 0
-	// CodecABIVersion as defined in vpx-1.6.0/vpx_codec.h:86
+	// CodecABIVersion as defined in vpx-1.15.2/vpx_codec.h:86
 	CodecABIVersion = 4 + ImageABIVersion
-	// CodecCapDecoder as defined in vpx-1.6.0/vpx_codec.h:154
+	// CodecCapDecoder as defined in vpx-1.15.2/vpx_codec.h:154
 	CodecCapDecoder = 1
-	// CodecCapEncoder as defined in vpx-1.6.0/vpx_codec.h:155
+	// CodecCapEncoder as defined in vpx-1.15.2/vpx_codec.h:155
 	CodecCapEncoder = 2
-	// ImageABIVersion as defined in vpx-1.6.0/vpx_image.h:31
+	// ImageABIVersion as defined in vpx-1.15.2/vpx_image.h:31
 	ImageABIVersion = 5
-	// ImageFormatPlanar as defined in vpx-1.6.0/vpx_image.h:34
+	// ImageFormatPlanar as defined in vpx-1.15.2/vpx_image.h:34
 	ImageFormatPlanar = 256
-	// ImageFormatUvFlip as defined in vpx-1.6.0/vpx_image.h:35
+	// ImageFormatUvFlip as defined in vpx-1.15.2/vpx_image.h:35
 	ImageFormatUvFlip = 512
-	// ImageFormatHasAlpha as defined in vpx-1.6.0/vpx_image.h:36
+	// ImageFormatHasAlpha as defined in vpx-1.15.2/vpx_image.h:36
 	ImageFormatHasAlpha = 1024
-	// ImageFormatHighbitdepth as defined in vpx-1.6.0/vpx_image.h:37
+	// ImageFormatHighbitdepth as defined in vpx-1.15.2/vpx_image.h:37
 	ImageFormatHighbitdepth = 2048
-	// PlanePacked as defined in vpx-1.6.0/vpx_image.h:111
+	// PlanePacked as defined in vpx-1.15.2/vpx_image.h:111
 	PlanePacked = 0
-	// PlaneY as defined in vpx-1.6.0/vpx_image.h:112
+	// PlaneY as defined in vpx-1.15.2/vpx_image.h:112
 	PlaneY = 0
-	// PlaneU as defined in vpx-1.6.0/vpx_image.h:113
+	// PlaneU as defined in vpx-1.15.2/vpx_image.h:113
 	PlaneU = 1
-	// PlaneV as defined in vpx-1.6.0/vpx_image.h:114
+	// PlaneV as defined in vpx-1.15.2/vpx_image.h:114
 	PlaneV = 2
-	// PlaneAlpha as defined in vpx-1.6.0/vpx_image.h:115
+	// PlaneAlpha as defined in vpx-1.15.2/vpx_image.h:115
 	PlaneAlpha = 3
-	// DecoderABIVersion as defined in vpx-1.6.0/vpx_decoder.h:43
+	// DecoderABIVersion as defined in vpx-1.15.2/vpx_decoder.h:43
 	DecoderABIVersion = 3 + CodecABIVersion
-	// CodecCapPutSlice as defined in vpx-1.6.0/vpx_decoder.h:53
+	// CodecCapPutSlice as defined in vpx-1.15.2/vpx_decoder.h:53
 	CodecCapPutSlice = 65536
-	// CodecCapPutFrame as defined in vpx-1.6.0/vpx_decoder.h:54
+	// CodecCapPutFrame as defined in vpx-1.15.2/vpx_decoder.h:54
 	CodecCapPutFrame = 131072
-	// CodecCapPostproc as defined in vpx-1.6.0/vpx_decoder.h:55
+	// CodecCapPostproc as defined in vpx-1.15.2/vpx_decoder.h:55
 	CodecCapPostproc = 262144
-	// CodecCapErrorConcealment as defined in vpx-1.6.0/vpx_decoder.h:56
+	// CodecCapErrorConcealment as defined in vpx-1.15.2/vpx_decoder.h:56
 	CodecCapErrorConcealment = 524288
-	// CodecCapInputFragments as defined in vpx-1.6.0/vpx_decoder.h:58
+	// CodecCapInputFragments as defined in vpx-1.15.2/vpx_decoder.h:58
 	CodecCapInputFragments = 1048576
-	// CodecCapFrameThreading as defined in vpx-1.6.0/vpx_decoder.h:68
+	// CodecCapFrameThreading as defined in vpx-1.15.2/vpx_decoder.h:68
 	CodecCapFrameThreading = 2097152
-	// CodecCapExternalFrameBuffer as defined in vpx-1.6.0/vpx_decoder.h:70
+	// CodecCapExternalFrameBuffer as defined in vpx-1.15.2/vpx_decoder.h:70
 	CodecCapExternalFrameBuffer = 4194304
-	// CodecUsePostproc as defined in vpx-1.6.0/vpx_decoder.h:73
+	// CodecUsePostproc as defined in vpx-1.15.2/vpx_decoder.h:73
 	CodecUsePostproc = 65536
-	// CodecUseErrorConcealment as defined in vpx-1.6.0/vpx_decoder.h:74
+	// CodecUseErrorConcealment as defined in vpx-1.15.2/vpx_decoder.h:74
 	CodecUseErrorConcealment = 131072
-	// CodecUseInputFragments as defined in vpx-1.6.0/vpx_decoder.h:76
+	// CodecUseInputFragments as defined in vpx-1.15.2/vpx_decoder.h:76
 	CodecUseInputFragments = 262144
-	// CodecUseFrameThreading as defined in vpx-1.6.0/vpx_decoder.h:79
+	// CodecUseFrameThreading as defined in vpx-1.15.2/vpx_decoder.h:79
 	CodecUseFrameThreading = 524288
-	// MaximumWorkBuffers as defined in vpx-1.6.0/vpx_frame_buffer.h:29
+	// MaximumWorkBuffers as defined in vpx-1.15.2/vpx_frame_buffer.h:29
 	MaximumWorkBuffers = 8
-	// Vp9MaximumRefBuffers as defined in vpx-1.6.0/vpx_frame_buffer.h:33
+	// Vp9MaximumRefBuffers as defined in vpx-1.15.2/vpx_frame_buffer.h:33
 	Vp9MaximumRefBuffers = 8
 )
 
-// CodecCxPktKind as declared in vpx-1.6.0/vpx_encoder.h:162
+// CodecCxPktKind as declared in vpx-1.15.2/vpx_encoder.h:162
 type CodecCxPktKind int32
 
-// CodecCxPktKind enumeration from vpx-1.6.0/vpx_encoder.h:162
+// CodecCxPktKind enumeration from vpx-1.15.2/vpx_encoder.h:162
 const (
 	CodecCxFramePkt   = C.VPX_CODEC_CX_FRAME_PKT
 	CodecStatsPkt     = C.VPX_CODEC_STATS_PKT
@@ -137,20 +137,20 @@ const (
 	CodecCustomPkt    = C.VPX_CODEC_CUSTOM_PKT
 )
 
-// EncPass as declared in vpx-1.6.0/vpx_encoder.h:253
+// EncPass as declared in vpx-1.15.2/vpx_encoder.h:253
 type EncPass int32
 
-// EncPass enumeration from vpx-1.6.0/vpx_encoder.h:253
+// EncPass enumeration from vpx-1.15.2/vpx_encoder.h:253
 const (
 	RcOnePass   = C.VPX_RC_ONE_PASS
 	RcFirstPass = C.VPX_RC_FIRST_PASS
 	RcLastPass  = C.VPX_RC_LAST_PASS
 )
 
-// RcMode as declared in vpx-1.6.0/vpx_encoder.h:261
+// RcMode as declared in vpx-1.15.2/vpx_encoder.h:261
 type RcMode int32
 
-// RcMode enumeration from vpx-1.6.0/vpx_encoder.h:261
+// RcMode enumeration from vpx-1.15.2/vpx_encoder.h:261
 const (
 	Vbr = C.VPX_VBR
 	Cbr = C.VPX_CBR
@@ -158,30 +158,30 @@ const (
 	Q   = C.VPX_Q
 )
 
-// KfMode as declared in vpx-1.6.0/vpx_encoder.h:277
+// KfMode as declared in vpx-1.15.2/vpx_encoder.h:277
 type KfMode int32
 
-// KfMode enumeration from vpx-1.6.0/vpx_encoder.h:277
+// KfMode enumeration from vpx-1.15.2/vpx_encoder.h:277
 const (
 	KfFixed    = C.VPX_KF_FIXED
 	KfAuto     = C.VPX_KF_AUTO
 	KfDisabled = C.VPX_KF_DISABLED
 )
 
-// BitDepth as declared in vpx-1.6.0/vpx_codec.h:223
+// BitDepth as declared in vpx-1.15.2/vpx_codec.h:223
 type BitDepth int32
 
-// BitDepth enumeration from vpx-1.6.0/vpx_codec.h:223
+// BitDepth enumeration from vpx-1.15.2/vpx_codec.h:223
 const (
 	Bits8  BitDepth = C.VPX_BITS_8
 	Bits10 BitDepth = C.VPX_BITS_10
 	Bits12 BitDepth = C.VPX_BITS_12
 )
 
-// ImageFormat as declared in vpx-1.6.0/vpx_image.h:67
+// ImageFormat as declared in vpx-1.15.2/vpx_image.h:67
 type ImageFormat int32
 
-// ImageFormat enumeration from vpx-1.6.0/vpx_image.h:67
+// ImageFormat enumeration from vpx-1.15.2/vpx_image.h:67
 const (
 	ImageFormatNone   ImageFormat = C.VPX_IMG_FMT_NONE
 	ImageFormatYv12   ImageFormat = C.VPX_IMG_FMT_YV12
@@ -195,10 +195,10 @@ const (
 	ImageFormatI44016 ImageFormat = C.VPX_IMG_FMT_I44016
 )
 
-// ColorSpace as declared in vpx-1.6.0/vpx_image.h:79
+// ColorSpace as declared in vpx-1.15.2/vpx_image.h:79
 type ColorSpace int32
 
-// ColorSpace enumeration from vpx-1.6.0/vpx_image.h:79
+// ColorSpace enumeration from vpx-1.15.2/vpx_image.h:79
 const (
 	ColorSpaceUnknown  ColorSpace = C.VPX_CS_UNKNOWN
 	ColorSpaceBt601    ColorSpace = C.VPX_CS_BT_601
@@ -210,19 +210,19 @@ const (
 	ColorSpaceSrgb     ColorSpace = C.VPX_CS_SRGB
 )
 
-// ColorRange as declared in vpx-1.6.0/vpx_image.h:85
+// ColorRange as declared in vpx-1.15.2/vpx_image.h:85
 type ColorRange int32
 
-// ColorRange enumeration from vpx-1.6.0/vpx_image.h:85
+// ColorRange enumeration from vpx-1.15.2/vpx_image.h:85
 const (
 	CrStudioRange ColorRange = C.VPX_CR_STUDIO_RANGE
 	CrFullRange   ColorRange = C.VPX_CR_FULL_RANGE
 )
 
-// CodecErr as declared in vpx-1.6.0/vpx_codec.h:142
+// CodecErr as declared in vpx-1.15.2/vpx_codec.h:142
 type CodecErr int32
 
-// CodecErr enumeration from vpx-1.6.0/vpx_codec.h:142
+// CodecErr enumeration from vpx-1.15.2/vpx_codec.h:142
 const (
 	CodecOk             CodecErr = C.VPX_CODEC_OK
 	CodecError          CodecErr = C.VPX_CODEC_ERROR

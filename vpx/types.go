@@ -17,7 +17,7 @@ package vpx
 import "C"
 import "unsafe"
 
-// FixedBuf as declared in vpx-1.6.0/vpx_encoder.h:110
+// FixedBuf as declared in vpx-1.15.2/vpx_encoder.h:110
 type FixedBuf struct {
 	Buf            unsafe.Pointer
 	Sz             uint
@@ -25,26 +25,26 @@ type FixedBuf struct {
 	allocseac28dc0 interface{}
 }
 
-// CodecPts type as declared in vpx-1.6.0/vpx_encoder.h:118
+// CodecPts type as declared in vpx-1.15.2/vpx_encoder.h:118
 type CodecPts int64
 
-// CodecFrameFlags type as declared in vpx-1.6.0/vpx_encoder.h:128
+// CodecFrameFlags type as declared in vpx-1.15.2/vpx_encoder.h:128
 type CodecFrameFlags uint32
 
-// CodecErFlags type as declared in vpx-1.6.0/vpx_encoder.h:144
+// CodecErFlags type as declared in vpx-1.15.2/vpx_encoder.h:144
 type CodecErFlags uint32
 
-// CodecCxPkt as declared in vpx-1.6.0/vpx_encoder.h:223
+// CodecCxPkt as declared in vpx-1.15.2/vpx_encoder.h:223
 type CodecCxPkt struct {
 	Kind           CodecCxPktKind
 	refa671fc83    *C.vpx_codec_cx_pkt_t
 	allocsa671fc83 interface{}
 }
 
-// CodecEncOutputCxPktCbFn type as declared in vpx-1.6.0/vpx_encoder.h:233
+// CodecEncOutputCxPktCbFn type as declared in vpx-1.15.2/vpx_encoder.h:233
 type CodecEncOutputCxPktCbFn func(pkt *CodecCxPkt, userData unsafe.Pointer)
 
-// CodecPrivOutputCxPktCbPair as declared in vpx-1.6.0/vpx_encoder.h:240
+// CodecPrivOutputCxPktCbPair as declared in vpx-1.15.2/vpx_encoder.h:240
 type CodecPrivOutputCxPktCbPair struct {
 	OutputCxPkt    CodecEncOutputCxPktCbFn
 	UserPriv       unsafe.Pointer
@@ -52,7 +52,7 @@ type CodecPrivOutputCxPktCbPair struct {
 	allocs5727a29d interface{}
 }
 
-// Rational as declared in vpx-1.6.0/vpx_encoder.h:249
+// Rational as declared in vpx-1.15.2/vpx_encoder.h:249
 type Rational struct {
 	Num            int32
 	Den            int32
@@ -60,10 +60,10 @@ type Rational struct {
 	allocs48ce5779 interface{}
 }
 
-// EncFrameFlags type as declared in vpx-1.6.0/vpx_encoder.h:291
+// EncFrameFlags type as declared in vpx-1.15.2/vpx_encoder.h:291
 type EncFrameFlags int
 
-// CodecEncCfg as declared in vpx-1.6.0/vpx_encoder.h:751
+// CodecEncCfg as declared in vpx-1.15.2/vpx_encoder.h:751
 type CodecEncCfg struct {
 	GUsage                  uint32
 	GThreads                uint32
@@ -113,28 +113,28 @@ type CodecEncCfg struct {
 	allocs37e25db9          interface{}
 }
 
-// SvcExtraCfg as declared in vpx-1.6.0/vpx_encoder.h:764
+// SvcExtraCfg as declared in vpx-1.15.2/vpx_encoder.h:764
 type SvcExtraCfg C.vpx_svc_extra_cfg_t
 
-// CodecCaps type as declared in vpx-1.6.0/vpx_codec.h:153
+// CodecCaps type as declared in vpx-1.15.2/vpx_codec.h:153
 type CodecCaps int
 
-// CodecFlags type as declared in vpx-1.6.0/vpx_codec.h:165
+// CodecFlags type as declared in vpx-1.15.2/vpx_codec.h:165
 type CodecFlags int
 
-// CodecIface as declared in vpx-1.6.0/vpx_codec.h:173
+// CodecIface as declared in vpx-1.15.2/vpx_codec.h:173
 type CodecIface C.vpx_codec_iface_t
 
-// CodecPriv as declared in vpx-1.6.0/vpx_codec.h:181
+// CodecPriv as declared in vpx-1.15.2/vpx_codec.h:181
 type CodecPriv C.vpx_codec_priv_t
 
-// CodecIter type as declared in vpx-1.6.0/vpx_codec.h:188
+// CodecIter type as declared in vpx-1.15.2/vpx_codec.h:188
 type CodecIter unsafe.Pointer
 
-// CodecCtx as declared in vpx-1.6.0/vpx_codec.h:213
+// CodecCtx as declared in vpx-1.15.2/vpx_codec.h:213
 type CodecCtx C.vpx_codec_ctx_t
 
-// Image as declared in vpx-1.6.0/vpx_image.h:133
+// Image as declared in vpx-1.15.2/vpx_image.h:133
 type Image struct {
 	Fmt            ImageFormat
 	Cs             ColorSpace
@@ -160,7 +160,7 @@ type Image struct {
 	allocsc09455e3 interface{}
 }
 
-// ImageRect as declared in vpx-1.6.0/vpx_image.h:141
+// ImageRect as declared in vpx-1.15.2/vpx_image.h:141
 type ImageRect struct {
 	X              uint32
 	Y              uint32
@@ -170,7 +170,7 @@ type ImageRect struct {
 	allocsf3ce051f interface{}
 }
 
-// CodecStreamInfo as declared in vpx-1.6.0/vpx_decoder.h:93
+// CodecStreamInfo as declared in vpx-1.15.2/vpx_decoder.h:93
 type CodecStreamInfo struct {
 	Sz             uint32
 	W              uint32
@@ -180,7 +180,7 @@ type CodecStreamInfo struct {
 	allocs342546e4 interface{}
 }
 
-// CodecDecCfg as declared in vpx-1.6.0/vpx_decoder.h:111
+// CodecDecCfg as declared in vpx-1.15.2/vpx_decoder.h:111
 type CodecDecCfg struct {
 	Threads        uint32
 	W              uint32
@@ -189,13 +189,13 @@ type CodecDecCfg struct {
 	allocs7df355ac interface{}
 }
 
-// CodecPutFrameCbFn type as declared in vpx-1.6.0/vpx_decoder.h:260
+// CodecPutFrameCbFn type as declared in vpx-1.15.2/vpx_decoder.h:260
 type CodecPutFrameCbFn func(userPriv unsafe.Pointer, img *Image)
 
-// CodecPutSliceCbFn type as declared in vpx-1.6.0/vpx_decoder.h:300
+// CodecPutSliceCbFn type as declared in vpx-1.15.2/vpx_decoder.h:300
 type CodecPutSliceCbFn func(userPriv unsafe.Pointer, img *Image, valid *ImageRect, update *ImageRect)
 
-// CodecFrameBuffer as declared in vpx-1.6.0/vpx_frame_buffer.h:43
+// CodecFrameBuffer as declared in vpx-1.15.2/vpx_frame_buffer.h:43
 type CodecFrameBuffer struct {
 	Data           []byte
 	Size           uint
@@ -204,8 +204,8 @@ type CodecFrameBuffer struct {
 	allocsd319b8f1 interface{}
 }
 
-// GetFrameBufferCbFn type as declared in vpx-1.6.0/vpx_frame_buffer.h:63
+// GetFrameBufferCbFn type as declared in vpx-1.15.2/vpx_frame_buffer.h:63
 type GetFrameBufferCbFn func(priv unsafe.Pointer, minSize uint, fb *CodecFrameBuffer) int32
 
-// ReleaseFrameBufferCbFn type as declared in vpx-1.6.0/vpx_frame_buffer.h:76
+// ReleaseFrameBufferCbFn type as declared in vpx-1.15.2/vpx_frame_buffer.h:76
 type ReleaseFrameBufferCbFn func(priv unsafe.Pointer, fb *CodecFrameBuffer) int32

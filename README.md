@@ -2,11 +2,11 @@
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/Azunyan1111/libvpx-go/vpx.svg)](https://pkg.go.dev/github.com/Azunyan1111/libvpx-go/vpx)
 
-Go bindings for [libvpx-1.8.0](http://www.webmproject.org/code/), the WebM Project VP8/VP9 codec implementation.
+Go bindings for [libvpx-1.15.2](http://www.webmproject.org/code/), the WebM Project VP8/VP9 codec implementation.
 
 This is a fork of [xlab/libvpx-go](https://github.com/xlab/libvpx-go) with the following improvements:
 
-- **Static linking** - libvpx 1.8.0 static library is bundled, no system installation required
+- **Static linking** - libvpx 1.15.2 static library is bundled, no system installation required
 - **Go Modules support** - Modern `go.mod` included
 - **Zero dependencies** - Just clone and build
 
@@ -44,7 +44,7 @@ if img != nil {
 
 This repository includes:
 
-- `lib/libvpx.a` - libvpx 1.8.0 static library (BSD 3-Clause License)
+- `lib/libvpx.a` - libvpx 1.15.2 static library (BSD 3-Clause License)
 - `include/vpx/` - libvpx header files
 - `lib/LICENSE.libvpx` - libvpx license file
 

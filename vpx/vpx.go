@@ -17,7 +17,7 @@ package vpx
 import "C"
 import "unsafe"
 
-// CodecEncInitVer function as declared in vpx-1.6.0/vpx_encoder.h:789
+// CodecEncInitVer function as declared in vpx-1.15.2/vpx_encoder.h:789
 func CodecEncInitVer(ctx *CodecCtx, iface *CodecIface, cfg *CodecEncCfg, flags CodecFlags, ver int32) CodecErr {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	ciface, _ := (*C.vpx_codec_iface_t)(unsafe.Pointer(iface)), cgoAllocsUnknown
@@ -29,7 +29,7 @@ func CodecEncInitVer(ctx *CodecCtx, iface *CodecIface, cfg *CodecEncCfg, flags C
 	return __v
 }
 
-// CodecEncInitMultiVer function as declared in vpx-1.6.0/vpx_encoder.h:824
+// CodecEncInitMultiVer function as declared in vpx-1.15.2/vpx_encoder.h:824
 func CodecEncInitMultiVer(ctx *CodecCtx, iface *CodecIface, cfg *CodecEncCfg, numEnc int32, flags CodecFlags, dsf *Rational, ver int32) CodecErr {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	ciface, _ := (*C.vpx_codec_iface_t)(unsafe.Pointer(iface)), cgoAllocsUnknown
@@ -43,7 +43,7 @@ func CodecEncInitMultiVer(ctx *CodecCtx, iface *CodecIface, cfg *CodecEncCfg, nu
 	return __v
 }
 
-// CodecEncConfigDefault function as declared in vpx-1.6.0/vpx_encoder.h:861
+// CodecEncConfigDefault function as declared in vpx-1.15.2/vpx_encoder.h:861
 func CodecEncConfigDefault(iface *CodecIface, cfg *CodecEncCfg, reserved uint32) CodecErr {
 	ciface, _ := (*C.vpx_codec_iface_t)(unsafe.Pointer(iface)), cgoAllocsUnknown
 	ccfg, _ := cfg.PassRef()
@@ -53,7 +53,7 @@ func CodecEncConfigDefault(iface *CodecIface, cfg *CodecEncCfg, reserved uint32)
 	return __v
 }
 
-// CodecEncConfigSet function as declared in vpx-1.6.0/vpx_encoder.h:880
+// CodecEncConfigSet function as declared in vpx-1.15.2/vpx_encoder.h:880
 func CodecEncConfigSet(ctx *CodecCtx, cfg *CodecEncCfg) CodecErr {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	ccfg, _ := cfg.PassRef()
@@ -62,7 +62,7 @@ func CodecEncConfigSet(ctx *CodecCtx, cfg *CodecEncCfg) CodecErr {
 	return __v
 }
 
-// CodecGetGlobalHeaders function as declared in vpx-1.6.0/vpx_encoder.h:895
+// CodecGetGlobalHeaders function as declared in vpx-1.15.2/vpx_encoder.h:895
 func CodecGetGlobalHeaders(ctx *CodecCtx) *FixedBuf {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	__ret := C.vpx_codec_get_global_headers(cctx)
@@ -70,7 +70,7 @@ func CodecGetGlobalHeaders(ctx *CodecCtx) *FixedBuf {
 	return __v
 }
 
-// CodecEncode function as declared in vpx-1.6.0/vpx_encoder.h:940
+// CodecEncode function as declared in vpx-1.15.2/vpx_encoder.h:940
 func CodecEncode(ctx *CodecCtx, img *Image, pts CodecPts, duration uint, flags EncFrameFlags, deadline uint) CodecErr {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	cimg, _ := img.PassRef()
@@ -83,7 +83,7 @@ func CodecEncode(ctx *CodecCtx, img *Image, pts CodecPts, duration uint, flags E
 	return __v
 }
 
-// CodecSetCxDataBuf function as declared in vpx-1.6.0/vpx_encoder.h:990
+// CodecSetCxDataBuf function as declared in vpx-1.15.2/vpx_encoder.h:990
 func CodecSetCxDataBuf(ctx *CodecCtx, buf *FixedBuf, padBefore uint32, padAfter uint32) CodecErr {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	cbuf, _ := buf.PassRef()
@@ -94,7 +94,7 @@ func CodecSetCxDataBuf(ctx *CodecCtx, buf *FixedBuf, padBefore uint32, padAfter 
 	return __v
 }
 
-// CodecGetCxData function as declared in vpx-1.6.0/vpx_encoder.h:1019
+// CodecGetCxData function as declared in vpx-1.15.2/vpx_encoder.h:1019
 func CodecGetCxData(ctx *CodecCtx, iter *CodecIter) *CodecCxPkt {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	citer, _ := (*C.vpx_codec_iter_t)(unsafe.Pointer(iter)), cgoAllocsUnknown
@@ -103,7 +103,7 @@ func CodecGetCxData(ctx *CodecCtx, iter *CodecIter) *CodecCxPkt {
 	return __v
 }
 
-// CodecGetPreviewFrame function as declared in vpx-1.6.0/vpx_encoder.h:1035
+// CodecGetPreviewFrame function as declared in vpx-1.15.2/vpx_encoder.h:1035
 func CodecGetPreviewFrame(ctx *CodecCtx) *Image {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	__ret := C.vpx_codec_get_preview_frame(cctx)
@@ -111,35 +111,35 @@ func CodecGetPreviewFrame(ctx *CodecCtx) *Image {
 	return __v
 }
 
-// CodecVersion function as declared in vpx-1.6.0/vpx_codec.h:242
+// CodecVersion function as declared in vpx-1.15.2/vpx_codec.h:242
 func CodecVersion() int32 {
 	__ret := C.vpx_codec_version()
 	__v := (int32)(__ret)
 	return __v
 }
 
-// CodecVersionStr function as declared in vpx-1.6.0/vpx_codec.h:264
+// CodecVersionStr function as declared in vpx-1.15.2/vpx_codec.h:264
 func CodecVersionStr() string {
 	__ret := C.vpx_codec_version_str()
 	__v := packPCharString(__ret)
 	return __v
 }
 
-// CodecVersionExtraStr function as declared in vpx-1.6.0/vpx_codec.h:273
+// CodecVersionExtraStr function as declared in vpx-1.15.2/vpx_codec.h:273
 func CodecVersionExtraStr() string {
 	__ret := C.vpx_codec_version_extra_str()
 	__v := packPCharString(__ret)
 	return __v
 }
 
-// CodecBuildConfig function as declared in vpx-1.6.0/vpx_codec.h:282
+// CodecBuildConfig function as declared in vpx-1.15.2/vpx_codec.h:282
 func CodecBuildConfig() string {
 	__ret := C.vpx_codec_build_config()
 	__v := packPCharString(__ret)
 	return __v
 }
 
-// CodecIfaceName function as declared in vpx-1.6.0/vpx_codec.h:292
+// CodecIfaceName function as declared in vpx-1.15.2/vpx_codec.h:292
 func CodecIfaceName(iface *CodecIface) string {
 	ciface, _ := (*C.vpx_codec_iface_t)(unsafe.Pointer(iface)), cgoAllocsUnknown
 	__ret := C.vpx_codec_iface_name(ciface)
@@ -147,7 +147,7 @@ func CodecIfaceName(iface *CodecIface) string {
 	return __v
 }
 
-// CodecErrToString function as declared in vpx-1.6.0/vpx_codec.h:305
+// CodecErrToString function as declared in vpx-1.15.2/vpx_codec.h:305
 func CodecErrToString(err CodecErr) string {
 	cerr, _ := (C.vpx_codec_err_t)(err), cgoAllocsUnknown
 	__ret := C.vpx_codec_err_to_string(cerr)
@@ -155,7 +155,7 @@ func CodecErrToString(err CodecErr) string {
 	return __v
 }
 
-// CodecGetError function as declared in vpx-1.6.0/vpx_codec.h:318
+// CodecGetError function as declared in vpx-1.15.2/vpx_codec.h:318
 func CodecGetError(ctx *CodecCtx) string {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	__ret := C.vpx_codec_error(cctx)
@@ -163,7 +163,7 @@ func CodecGetError(ctx *CodecCtx) string {
 	return __v
 }
 
-// CodecErrorDetail function as declared in vpx-1.6.0/vpx_codec.h:331
+// CodecErrorDetail function as declared in vpx-1.15.2/vpx_codec.h:331
 func CodecErrorDetail(ctx *CodecCtx) string {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	__ret := C.vpx_codec_error_detail(cctx)
@@ -171,7 +171,7 @@ func CodecErrorDetail(ctx *CodecCtx) string {
 	return __v
 }
 
-// CodecDestroy function as declared in vpx-1.6.0/vpx_codec.h:351
+// CodecDestroy function as declared in vpx-1.15.2/vpx_codec.h:351
 func CodecDestroy(ctx *CodecCtx) CodecErr {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	__ret := C.vpx_codec_destroy(cctx)
@@ -179,7 +179,7 @@ func CodecDestroy(ctx *CodecCtx) CodecErr {
 	return __v
 }
 
-// CodecGetCaps function as declared in vpx-1.6.0/vpx_codec.h:361
+// CodecGetCaps function as declared in vpx-1.15.2/vpx_codec.h:361
 func CodecGetCaps(iface *CodecIface) CodecCaps {
 	ciface, _ := (*C.vpx_codec_iface_t)(unsafe.Pointer(iface)), cgoAllocsUnknown
 	__ret := C.vpx_codec_get_caps(ciface)
@@ -187,7 +187,7 @@ func CodecGetCaps(iface *CodecIface) CodecCaps {
 	return __v
 }
 
-// ImageAlloc function as declared in vpx-1.6.0/vpx_image.h:161
+// ImageAlloc function as declared in vpx-1.15.2/vpx_image.h:161
 func ImageAlloc(img *Image, fmt ImageFormat, dW uint32, dH uint32, align uint32) *Image {
 	cimg, _ := img.PassRef()
 	cfmt, _ := (C.vpx_img_fmt_t)(fmt), cgoAllocsUnknown
@@ -199,7 +199,7 @@ func ImageAlloc(img *Image, fmt ImageFormat, dW uint32, dH uint32, align uint32)
 	return __v
 }
 
-// ImageWrap function as declared in vpx-1.6.0/vpx_image.h:186
+// ImageWrap function as declared in vpx-1.15.2/vpx_image.h:186
 func ImageWrap(img *Image, fmt ImageFormat, dW uint32, dH uint32, align uint32, imgData *byte) *Image {
 	cimg, _ := img.PassRef()
 	cfmt, _ := (C.vpx_img_fmt_t)(fmt), cgoAllocsUnknown
@@ -212,7 +212,7 @@ func ImageWrap(img *Image, fmt ImageFormat, dW uint32, dH uint32, align uint32, 
 	return __v
 }
 
-// ImageSetRect function as declared in vpx-1.6.0/vpx_image.h:207
+// ImageSetRect function as declared in vpx-1.15.2/vpx_image.h:207
 func ImageSetRect(img *Image, x uint32, y uint32, w uint32, h uint32) int32 {
 	cimg, _ := img.PassRef()
 	cx, _ := (C.uint)(x), cgoAllocsUnknown
@@ -224,19 +224,19 @@ func ImageSetRect(img *Image, x uint32, y uint32, w uint32, h uint32) int32 {
 	return __v
 }
 
-// ImageFlip function as declared in vpx-1.6.0/vpx_image.h:221
+// ImageFlip function as declared in vpx-1.15.2/vpx_image.h:221
 func ImageFlip(img *Image) {
 	cimg, _ := img.PassRef()
 	C.vpx_img_flip(cimg)
 }
 
-// ImageFree function as declared in vpx-1.6.0/vpx_image.h:229
+// ImageFree function as declared in vpx-1.15.2/vpx_image.h:229
 func ImageFree(img *Image) {
 	cimg, _ := img.PassRef()
 	C.vpx_img_free(cimg)
 }
 
-// CodecDecInitVer function as declared in vpx-1.6.0/vpx_decoder.h:136
+// CodecDecInitVer function as declared in vpx-1.15.2/vpx_decoder.h:136
 func CodecDecInitVer(ctx *CodecCtx, iface *CodecIface, cfg *CodecDecCfg, flags CodecFlags, ver int32) CodecErr {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	ciface, _ := (*C.vpx_codec_iface_t)(unsafe.Pointer(iface)), cgoAllocsUnknown
@@ -248,7 +248,7 @@ func CodecDecInitVer(ctx *CodecCtx, iface *CodecIface, cfg *CodecDecCfg, flags C
 	return __v
 }
 
-// CodecPeekStreamInfo function as declared in vpx-1.6.0/vpx_decoder.h:167
+// CodecPeekStreamInfo function as declared in vpx-1.15.2/vpx_decoder.h:167
 func CodecPeekStreamInfo(iface *CodecIface, data string, dataSz uint32, si *CodecStreamInfo) CodecErr {
 	ciface, _ := (*C.vpx_codec_iface_t)(unsafe.Pointer(iface)), cgoAllocsUnknown
 	cdata, _ := unpackPUint8String(data)
@@ -259,7 +259,7 @@ func CodecPeekStreamInfo(iface *CodecIface, data string, dataSz uint32, si *Code
 	return __v
 }
 
-// CodecGetStreamInfo function as declared in vpx-1.6.0/vpx_decoder.h:186
+// CodecGetStreamInfo function as declared in vpx-1.15.2/vpx_decoder.h:186
 func CodecGetStreamInfo(ctx *CodecCtx, si *CodecStreamInfo) CodecErr {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	csi, _ := si.PassRef()
@@ -268,7 +268,7 @@ func CodecGetStreamInfo(ctx *CodecCtx, si *CodecStreamInfo) CodecErr {
 	return __v
 }
 
-// CodecDecode function as declared in vpx-1.6.0/vpx_decoder.h:220
+// CodecDecode function as declared in vpx-1.15.2/vpx_decoder.h:220
 func CodecDecode(ctx *CodecCtx, data string, dataSz uint32, userPriv unsafe.Pointer, deadline int) CodecErr {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	cdata, _ := unpackPUint8String(data)
@@ -280,7 +280,7 @@ func CodecDecode(ctx *CodecCtx, data string, dataSz uint32, userPriv unsafe.Poin
 	return __v
 }
 
-// CodecGetFrame function as declared in vpx-1.6.0/vpx_decoder.h:242
+// CodecGetFrame function as declared in vpx-1.15.2/vpx_decoder.h:242
 func CodecGetFrame(ctx *CodecCtx, iter *CodecIter) *Image {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	citer, _ := (*C.vpx_codec_iter_t)(unsafe.Pointer(iter)), cgoAllocsUnknown
@@ -289,7 +289,7 @@ func CodecGetFrame(ctx *CodecCtx, iter *CodecIter) *Image {
 	return __v
 }
 
-// CodecRegisterPutFrameCb function as declared in vpx-1.6.0/vpx_decoder.h:279
+// CodecRegisterPutFrameCb function as declared in vpx-1.15.2/vpx_decoder.h:279
 func CodecRegisterPutFrameCb(ctx *CodecCtx, cb CodecPutFrameCbFn, userPriv unsafe.Pointer) CodecErr {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	ccb, _ := cb.PassValue()
@@ -299,7 +299,7 @@ func CodecRegisterPutFrameCb(ctx *CodecCtx, cb CodecPutFrameCbFn, userPriv unsaf
 	return __v
 }
 
-// CodecRegisterPutSliceCb function as declared in vpx-1.6.0/vpx_decoder.h:321
+// CodecRegisterPutSliceCb function as declared in vpx-1.15.2/vpx_decoder.h:321
 func CodecRegisterPutSliceCb(ctx *CodecCtx, cb CodecPutSliceCbFn, userPriv unsafe.Pointer) CodecErr {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	ccb, _ := cb.PassValue()
@@ -309,7 +309,7 @@ func CodecRegisterPutSliceCb(ctx *CodecCtx, cb CodecPutSliceCbFn, userPriv unsaf
 	return __v
 }
 
-// CodecSetFrameBufferFunctions function as declared in vpx-1.6.0/vpx_decoder.h:366
+// CodecSetFrameBufferFunctions function as declared in vpx-1.15.2/vpx_decoder.h:366
 func CodecSetFrameBufferFunctions(ctx *CodecCtx, cbGet GetFrameBufferCbFn, cbRelease ReleaseFrameBufferCbFn, cbPriv unsafe.Pointer) CodecErr {
 	cctx, _ := (*C.vpx_codec_ctx_t)(unsafe.Pointer(ctx)), cgoAllocsUnknown
 	ccbGet, _ := cbGet.PassValue()

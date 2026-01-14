@@ -4,6 +4,6 @@
 // By https://git.io/c-for-go. DO NOT EDIT.
 
 /*
-Package vpx provides Go bindings for libvpx-1.6.0, the WebM Project VP8/VP9 codec implementation.
+Package vpx provides Go bindings for libvpx-1.15.2, the WebM Project VP8/VP9 codec implementation.
 */
 package vpx
