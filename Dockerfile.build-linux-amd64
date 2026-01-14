@@ -1,0 +1,47 @@
+FROM ubuntu:24.04
+
+# Update package list
+RUN apt-get update
+
+# Install build-essential
+RUN apt-get install -y build-essential
+
+# Install yasm for assembly optimization
+RUN apt-get install -y yasm
+
+# Install curl for downloading source
+RUN apt-get install -y curl
+
+# Clean up apt cache
+RUN rm -rf /var/lib/apt/lists/*
+
+# Set libvpx version
+ARG LIBVPX_VERSION=1.15.2
+
+WORKDIR /build
+
+# Download and extract libvpx source
+RUN curl -L https://github.com/webmproject/libvpx/archive/refs/tags/v${LIBVPX_VERSION}.tar.gz | tar xzf - && \
+    mv libvpx-${LIBVPX_VERSION} libvpx
+
+WORKDIR /build/libvpx
+
+# Configure for static library only
+RUN ./configure \
+    --prefix=/usr/local \
+    --disable-shared \
+    --enable-static \
+    --enable-vp8 \
+    --enable-vp9 \
+    --disable-examples \
+    --disable-tools \
+    --disable-docs \
+    --disable-unit-tests
+
+# Build
+RUN make -j$(nproc)
+
+# Copy the output to /output
+RUN mkdir -p /output && cp libvpx.a /output/
+
+CMD ["cat", "/output/libvpx.a"]

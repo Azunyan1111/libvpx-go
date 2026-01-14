@@ -8,4 +8,12 @@ clean:
 
 test:
 	cd vpx && go test -v
+
+test-linux:
+	docker build --platform linux/amd64 -t libvpx-test-linux-amd64 -f Dockerfile.test-linux-amd64 .
+	docker run --platform linux/amd64 --rm libvpx-test-linux-amd64
+
+build-libvpx-linux:
+	docker build --platform linux/amd64 -t libvpx-builder-linux-amd64 -f Dockerfile.build-linux-amd64 .
+	docker run --rm libvpx-builder-linux-amd64 > lib/linux_amd64/libvpx.a
 	
