@@ -6,8 +6,7 @@
 package vpx
 
 /*
-#cgo CFLAGS: -I${SRCDIR}/../include
-#cgo LDFLAGS: -L${SRCDIR}/../lib -lvpx
+#cgo pkg-config: vpx
 #include <vpx/vpx_encoder.h>
 #include <vpx/vpx_decoder.h>
 #include <vpx/vp8.h>
