@@ -31,8 +31,12 @@ const (
 	SsMaxLayers = 5
 	// SsDefaultLayers as defined in vpx-1.6.0/vpx_encoder.h:55
 	SsDefaultLayers = 1
-	// EncoderABIVersion as defined in vpx-1.6.0/vpx_encoder.h:65
-	EncoderABIVersion = 14 + CodecABIVersion
+	// EncoderABIVersion as defined in vpx-1.15.2/vpx_encoder.h:65
+	EncoderABIVersion = 18 + CodecABIVersion + ExtRatectrlABIVersion
+	// TplABIVersion as defined in vpx-1.15.2/vpx_tpl.h:33
+	TplABIVersion = 4
+	// ExtRatectrlABIVersion as defined in vpx-1.15.2/vpx_ext_ratectrl.h:33
+	ExtRatectrlABIVersion = 6 + TplABIVersion
 	// CodecCapPsnr as defined in vpx-1.6.0/vpx_encoder.h:77
 	CodecCapPsnr = 65536
 	// CodecCapOutputPartition as defined in vpx-1.6.0/vpx_encoder.h:84
