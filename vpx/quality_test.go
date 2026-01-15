@@ -238,20 +238,39 @@ func TestVP9ImageQuality(t *testing.T) {
 		t.Fatalf("failed to initialize VP9 encoder: %v", err)
 	}
 
-	if err := Error(CodecEncode(encCtx, origImg, 0, 1, 0, DlGoodQuality)); err != nil {
-		t.Fatalf("failed to encode: %v", err)
+	// VP9 requires multiple frames for reliable packet output
+	var encodedData []byte
+	for i := 0; i < 5; i++ {
+		fillTestPattern(origImg, i)
+		if err := Error(CodecEncode(encCtx, origImg, CodecPts(i), 1, 0, DlGoodQuality)); err != nil {
+			t.Fatalf("failed to encode frame %d: %v", i, err)
+		}
+
+		var encIter CodecIter
+		for pkt := CodecGetCxData(encCtx, &encIter); pkt != nil; pkt = CodecGetCxData(encCtx, &encIter) {
+			pkt.Deref()
+			if pkt.Kind == CodecCxFramePkt && len(encodedData) == 0 {
+				encodedData = make([]byte, len(pkt.GetFrameData()))
+				copy(encodedData, pkt.GetFrameData())
+			}
+		}
 	}
 
-	// VP9 requires flush
+	// Flush
 	CodecEncode(encCtx, nil, 0, 0, 0, DlGoodQuality)
 
 	var encIter CodecIter
-	pkt := CodecGetCxData(encCtx, &encIter)
-	if pkt == nil {
+	for pkt := CodecGetCxData(encCtx, &encIter); pkt != nil; pkt = CodecGetCxData(encCtx, &encIter) {
+		pkt.Deref()
+		if pkt.Kind == CodecCxFramePkt && len(encodedData) == 0 {
+			encodedData = make([]byte, len(pkt.GetFrameData()))
+			copy(encodedData, pkt.GetFrameData())
+		}
+	}
+
+	if len(encodedData) == 0 {
 		t.Fatal("no encoded packet")
 	}
-	pkt.Deref()
-	encodedData := pkt.GetFrameData()
 
 	// Decode
 	decCtx := NewCodecCtx()
@@ -557,16 +576,37 @@ func encodeDecodeVP9(t *testing.T, origImg *Image, bitrate uint32) *Image {
 	cfg.GLagInFrames = 0
 
 	CodecEncInitVer(encCtx, encIface, cfg, 0, EncoderABIVersion)
-	CodecEncode(encCtx, origImg, 0, 1, 0, DlGoodQuality)
+
+	// VP9 requires multiple frames for reliable packet output
+	var encodedData []byte
+	for i := 0; i < 5; i++ {
+		fillTestPattern(origImg, i)
+		CodecEncode(encCtx, origImg, CodecPts(i), 1, 0, DlGoodQuality)
+
+		var encIter CodecIter
+		for pkt := CodecGetCxData(encCtx, &encIter); pkt != nil; pkt = CodecGetCxData(encCtx, &encIter) {
+			pkt.Deref()
+			if pkt.Kind == CodecCxFramePkt && len(encodedData) == 0 {
+				encodedData = make([]byte, len(pkt.GetFrameData()))
+				copy(encodedData, pkt.GetFrameData())
+			}
+		}
+	}
+
 	CodecEncode(encCtx, nil, 0, 0, 0, DlGoodQuality) // Flush
 
 	var encIter CodecIter
-	pkt := CodecGetCxData(encCtx, &encIter)
-	if pkt == nil {
+	for pkt := CodecGetCxData(encCtx, &encIter); pkt != nil; pkt = CodecGetCxData(encCtx, &encIter) {
+		pkt.Deref()
+		if pkt.Kind == CodecCxFramePkt && len(encodedData) == 0 {
+			encodedData = make([]byte, len(pkt.GetFrameData()))
+			copy(encodedData, pkt.GetFrameData())
+		}
+	}
+
+	if len(encodedData) == 0 {
 		t.Fatal("VP9: no encoded packet")
 	}
-	pkt.Deref()
-	encodedData := pkt.GetFrameData()
 
 	// Decode
 	decCtx := NewCodecCtx()

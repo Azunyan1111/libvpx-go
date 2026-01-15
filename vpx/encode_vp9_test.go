@@ -49,10 +49,22 @@ func TestVP9EncodeBasic(t *testing.T) {
 	defer ImageFree(img)
 	img.Deref()
 
-	fillTestPattern(img, 0)
+	var totalBytes int
 
-	if err := Error(CodecEncode(ctx, img, 0, 1, 0, DlGoodQuality)); err != nil {
-		t.Fatalf("failed to encode frame: %v", err)
+	// VP9 requires multiple frames for reliable packet output
+	for i := 0; i < 5; i++ {
+		fillTestPattern(img, i)
+		if err := Error(CodecEncode(ctx, img, CodecPts(i), 1, 0, DlGoodQuality)); err != nil {
+			t.Fatalf("failed to encode frame %d: %v", i, err)
+		}
+
+		var iter CodecIter
+		for pkt := CodecGetCxData(ctx, &iter); pkt != nil; pkt = CodecGetCxData(ctx, &iter) {
+			pkt.Deref()
+			if pkt.Kind == CodecCxFramePkt {
+				totalBytes += len(pkt.GetFrameData())
+			}
+		}
 	}
 
 	// VP9 requires flush to get buffered frames
@@ -61,18 +73,18 @@ func TestVP9EncodeBasic(t *testing.T) {
 	}
 
 	var iter CodecIter
-	pkt := CodecGetCxData(ctx, &iter)
-	if pkt == nil {
-		t.Fatal("no encoded packet returned after flush")
-	}
-	pkt.Deref()
-
-	data := pkt.GetFrameData()
-	if len(data) == 0 {
-		t.Fatal("encoded data is empty")
+	for pkt := CodecGetCxData(ctx, &iter); pkt != nil; pkt = CodecGetCxData(ctx, &iter) {
+		pkt.Deref()
+		if pkt.Kind == CodecCxFramePkt {
+			totalBytes += len(pkt.GetFrameData())
+		}
 	}
 
-	t.Logf("VP9 encoded frame size: %d bytes, keyframe: %v", len(data), pkt.IsKeyframe())
+	if totalBytes == 0 {
+		t.Fatal("no encoded data")
+	}
+
+	t.Logf("VP9 encoded 5 frames: %d bytes total", totalBytes)
 }
 
 // TestVP9EncodeMultipleFrames demonstrates VP9 encoding of multiple frames.
@@ -183,25 +195,40 @@ func TestVP9EncodeHighQuality(t *testing.T) {
 	defer ImageFree(img)
 	img.Deref()
 
-	fillTestPattern(img, 0)
+	var totalBytes int
 
-	// Use best quality deadline
-	if err := Error(CodecEncode(ctx, img, 0, 1, 0, DlBestQuality)); err != nil {
-		t.Fatalf("failed to encode: %v", err)
+	// VP9 requires multiple frames for reliable packet output
+	for i := 0; i < 5; i++ {
+		fillTestPattern(img, i)
+		if err := Error(CodecEncode(ctx, img, CodecPts(i), 1, 0, DlBestQuality)); err != nil {
+			t.Fatalf("failed to encode frame %d: %v", i, err)
+		}
+
+		var iter CodecIter
+		for pkt := CodecGetCxData(ctx, &iter); pkt != nil; pkt = CodecGetCxData(ctx, &iter) {
+			pkt.Deref()
+			if pkt.Kind == CodecCxFramePkt {
+				totalBytes += len(pkt.GetFrameData())
+			}
+		}
 	}
 
 	// Flush
 	CodecEncode(ctx, nil, 0, 0, 0, DlBestQuality)
 
 	var iter CodecIter
-	pkt := CodecGetCxData(ctx, &iter)
-	if pkt == nil {
-		t.Fatal("no encoded packet")
+	for pkt := CodecGetCxData(ctx, &iter); pkt != nil; pkt = CodecGetCxData(ctx, &iter) {
+		pkt.Deref()
+		if pkt.Kind == CodecCxFramePkt {
+			totalBytes += len(pkt.GetFrameData())
+		}
 	}
-	pkt.Deref()
 
-	data := pkt.GetFrameData()
-	t.Logf("VP9 high quality frame size: %d bytes", len(data))
+	if totalBytes == 0 {
+		t.Fatal("no encoded data")
+	}
+
+	t.Logf("VP9 high quality 5 frames: %d bytes total", totalBytes)
 }
 
 // TestVP9EncodeRealtime demonstrates VP9 encoding optimized for real-time.
@@ -236,25 +263,40 @@ func TestVP9EncodeRealtime(t *testing.T) {
 	defer ImageFree(img)
 	img.Deref()
 
-	fillTestPattern(img, 0)
+	var totalBytes int
 
-	// Use realtime deadline
-	if err := Error(CodecEncode(ctx, img, 0, 1, 0, DlRealtime)); err != nil {
-		t.Fatalf("failed to encode: %v", err)
+	// VP9 requires multiple frames for reliable packet output
+	for i := 0; i < 5; i++ {
+		fillTestPattern(img, i)
+		if err := Error(CodecEncode(ctx, img, CodecPts(i), 1, 0, DlRealtime)); err != nil {
+			t.Fatalf("failed to encode frame %d: %v", i, err)
+		}
+
+		var iter CodecIter
+		for pkt := CodecGetCxData(ctx, &iter); pkt != nil; pkt = CodecGetCxData(ctx, &iter) {
+			pkt.Deref()
+			if pkt.Kind == CodecCxFramePkt {
+				totalBytes += len(pkt.GetFrameData())
+			}
+		}
 	}
 
 	// Flush
 	CodecEncode(ctx, nil, 0, 0, 0, DlRealtime)
 
 	var iter CodecIter
-	pkt := CodecGetCxData(ctx, &iter)
-	if pkt == nil {
-		t.Fatal("no encoded packet")
+	for pkt := CodecGetCxData(ctx, &iter); pkt != nil; pkt = CodecGetCxData(ctx, &iter) {
+		pkt.Deref()
+		if pkt.Kind == CodecCxFramePkt {
+			totalBytes += len(pkt.GetFrameData())
+		}
 	}
-	pkt.Deref()
 
-	data := pkt.GetFrameData()
-	t.Logf("VP9 realtime frame size: %d bytes", len(data))
+	if totalBytes == 0 {
+		t.Fatal("no encoded data")
+	}
+
+	t.Logf("VP9 realtime 5 frames: %d bytes total", totalBytes)
 }
 
 // TestVP9CompareWithVP8 compares VP9 and VP8 encoding efficiency.

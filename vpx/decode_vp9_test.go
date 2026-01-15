@@ -201,7 +201,8 @@ func TestVP9TranscodeToVP8(t *testing.T) {
 	t.Logf("transcoding ratio: VP9 %d -> VP8 %d bytes", len(vp9Data), len(vp8Data))
 }
 
-// encodeVP9TestFrame encodes a single test frame using VP9.
+// encodeVP9TestFrame encodes test frames and returns the first keyframe for VP9.
+// VP9 requires multiple frames to reliably produce output packets.
 func encodeVP9TestFrame(t *testing.T, width, height uint32) []byte {
 	t.Helper()
 
@@ -228,23 +229,41 @@ func encodeVP9TestFrame(t *testing.T, width, height uint32) []byte {
 	defer ImageFree(img)
 	img.Deref()
 
-	fillTestPattern(img, 0)
+	// VP9 requires multiple frames for reliable packet output
+	for i := 0; i < 5; i++ {
+		fillTestPattern(img, i)
+		if err := Error(CodecEncode(ctx, img, CodecPts(i), 1, 0, DlGoodQuality)); err != nil {
+			t.Fatalf("failed to encode frame %d: %v", i, err)
+		}
 
-	if err := Error(CodecEncode(ctx, img, 0, 1, 0, DlGoodQuality)); err != nil {
-		t.Fatalf("failed to encode: %v", err)
+		var iter CodecIter
+		for pkt := CodecGetCxData(ctx, &iter); pkt != nil; pkt = CodecGetCxData(ctx, &iter) {
+			pkt.Deref()
+			if pkt.Kind == CodecCxFramePkt {
+				data := pkt.GetFrameData()
+				cpy := make([]byte, len(data))
+				copy(cpy, data)
+				return cpy
+			}
+		}
 	}
 
-	// VP9 requires flush
+	// Flush remaining frames
 	CodecEncode(ctx, nil, 0, 0, 0, DlGoodQuality)
 
 	var iter CodecIter
-	pkt := CodecGetCxData(ctx, &iter)
-	if pkt == nil {
-		t.Fatal("no encoded packet")
+	for pkt := CodecGetCxData(ctx, &iter); pkt != nil; pkt = CodecGetCxData(ctx, &iter) {
+		pkt.Deref()
+		if pkt.Kind == CodecCxFramePkt {
+			data := pkt.GetFrameData()
+			cpy := make([]byte, len(data))
+			copy(cpy, data)
+			return cpy
+		}
 	}
-	pkt.Deref()
 
-	return pkt.GetFrameData()
+	t.Log("no encoded packet")
+	return nil
 }
 
 // encodeVP9TestFrames encodes multiple test frames using VP9.

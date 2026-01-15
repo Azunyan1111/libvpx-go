@@ -333,24 +333,40 @@ func encodeVP9FrameWithSize(t *testing.T, img *Image, width, height uint32) []by
 		return nil
 	}
 
-	if err := Error(CodecEncode(encCtx, img, 0, 1, 0, DlGoodQuality)); err != nil {
-		t.Logf("VP9 encode failed: %v", err)
-		return nil
+	// VP9 requires multiple frames for reliable packet output
+	for i := 0; i < 5; i++ {
+		fillTestPatternForSize(img, i, width, height)
+		if err := Error(CodecEncode(encCtx, img, CodecPts(i), 1, 0, DlGoodQuality)); err != nil {
+			t.Logf("VP9 encode failed: %v", err)
+			return nil
+		}
+
+		var iter CodecIter
+		for pkt := CodecGetCxData(encCtx, &iter); pkt != nil; pkt = CodecGetCxData(encCtx, &iter) {
+			pkt.Deref()
+			if pkt.Kind == CodecCxFramePkt {
+				data := make([]byte, len(pkt.GetFrameData()))
+				copy(data, pkt.GetFrameData())
+				return data
+			}
+		}
 	}
 
+	// Flush
 	CodecEncode(encCtx, nil, 0, 0, 0, DlGoodQuality)
 
 	var iter CodecIter
-	pkt := CodecGetCxData(encCtx, &iter)
-	if pkt == nil {
-		t.Logf("VP9: no packet for %dx%d", width, height)
-		return nil
+	for pkt := CodecGetCxData(encCtx, &iter); pkt != nil; pkt = CodecGetCxData(encCtx, &iter) {
+		pkt.Deref()
+		if pkt.Kind == CodecCxFramePkt {
+			data := make([]byte, len(pkt.GetFrameData()))
+			copy(data, pkt.GetFrameData())
+			return data
+		}
 	}
-	pkt.Deref()
 
-	data := make([]byte, len(pkt.GetFrameData()))
-	copy(data, pkt.GetFrameData())
-	return data
+	t.Logf("VP9: no packet for %dx%d", width, height)
+	return nil
 }
 
 func decodeFrame(t *testing.T, data []byte, isVP8 bool) *Image {
@@ -496,28 +512,46 @@ func encodeFrameWithNewImage(t *testing.T, width, height uint32, isVP8 bool) []b
 	defer ImageFree(img)
 	img.Deref()
 
-	fillTestPattern(img, 0)
-
-	if err := Error(CodecEncode(encCtx, img, 0, 1, 0, DlGoodQuality)); err != nil {
-		t.Logf("encode failed: %v", err)
-		return nil
+	// VP9 requires multiple frames for reliable packet output
+	numFrames := 1
+	if !isVP8 {
+		numFrames = 5
 	}
 
+	for i := 0; i < numFrames; i++ {
+		fillTestPattern(img, i)
+		if err := Error(CodecEncode(encCtx, img, CodecPts(i), 1, 0, DlGoodQuality)); err != nil {
+			t.Logf("encode failed: %v", err)
+			return nil
+		}
+
+		var iter CodecIter
+		for pkt := CodecGetCxData(encCtx, &iter); pkt != nil; pkt = CodecGetCxData(encCtx, &iter) {
+			pkt.Deref()
+			if pkt.Kind == CodecCxFramePkt {
+				data := make([]byte, len(pkt.GetFrameData()))
+				copy(data, pkt.GetFrameData())
+				return data
+			}
+		}
+	}
+
+	// Flush for VP9
 	if !isVP8 {
 		CodecEncode(encCtx, nil, 0, 0, 0, DlGoodQuality)
+		var iter CodecIter
+		for pkt := CodecGetCxData(encCtx, &iter); pkt != nil; pkt = CodecGetCxData(encCtx, &iter) {
+			pkt.Deref()
+			if pkt.Kind == CodecCxFramePkt {
+				data := make([]byte, len(pkt.GetFrameData()))
+				copy(data, pkt.GetFrameData())
+				return data
+			}
+		}
 	}
 
-	var iter CodecIter
-	pkt := CodecGetCxData(encCtx, &iter)
-	if pkt == nil {
-		t.Logf("no packet for %dx%d", width, height)
-		return nil
-	}
-	pkt.Deref()
-
-	data := make([]byte, len(pkt.GetFrameData()))
-	copy(data, pkt.GetFrameData())
-	return data
+	t.Logf("no packet for %dx%d", width, height)
+	return nil
 }
 
 func fillTestPatternForSize(img *Image, frameNum int, width, height uint32) {
